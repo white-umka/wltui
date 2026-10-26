@@ -5,6 +5,7 @@ import (
 	"log"
 	"os"
 	"os/exec"
+	"path/filepath"
 )
 
 func main() {
@@ -31,8 +32,9 @@ func main() {
 	var PictureName string
 	fmt.Println("enter name of picture")
 	fmt.Scan(&PictureName)
-	
-	cmd := exec.Command("timg", WallDirPath+"/"+PictureName)
+
+	picturePath := filepath.Join(WallDirPath, PictureName) // склеивание ~/wallpapers + wallpaper.png
+	cmd := exec.Command("timg", "-g50x50", picturePath)
 
 	// КРИТИЧЕСКИ ВАЖНО
 	// связываем потоки дочернего процесса с терминалом 
